@@ -5,6 +5,7 @@ export default class LoginForm extends React.Component {
   constructor(props){
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
     this.state = ({
       username: '',
       password: ''
@@ -18,7 +19,7 @@ export default class LoginForm extends React.Component {
 
   onSubmit(e){
     e.preventDefault();
-    console.log(this.state);
+    this.props.logIn(this.state.username, this.state.password);
   }
 
   render(){
@@ -34,7 +35,7 @@ export default class LoginForm extends React.Component {
               value={this.state.username}
               onChange={this.onChange}
             />
-            <label title="username" className="fa fa-user" for="username"/>
+            <label title="username" className="fa fa-user" htmlFor="username"/>
           </div>
         </div>
         <div className="form-group">
@@ -47,7 +48,7 @@ export default class LoginForm extends React.Component {
               value={this.state.password}
               onChange={this.onChange}
             />
-            <label title="password" className="fa fa-lock" for="password"/>
+            <label title="password" className="fa fa-lock" htmlFor="password"/>
           </div>
         </div>
         <div className="checkbox">

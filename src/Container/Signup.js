@@ -8,14 +8,10 @@ export default class Signup extends React.Component {
   }
 
   componentDidMount(){
-    console.log(this.props);
   }
 
   signUp(username, email, password){
-    console.log(this.props.userService);
-    this.props.userService.signup(username, email, password).then( res => {
-      console.log(res);
-    });
+    this.props.userService.signup(username, email, password);
   }
 
   render(){
