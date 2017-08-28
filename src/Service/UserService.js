@@ -6,15 +6,15 @@ export default class UserService {
     this.host = host;
   }
 
-  signup(username, email, password){
+  signup(username, email, password, callback){
     let signupForm = {username, email, password},
         requestObj = {
           method : 'POST',
-          url : host + '/api/signup',
+          url : 'http://localhost:3000/api/signup',
           body : signupForm,
           json: true
         };
-    return request(requestObj, responseHandler);
+    return request(requestObj, callback);
   }
 
 }

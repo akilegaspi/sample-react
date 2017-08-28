@@ -6,30 +6,25 @@ export default class AuthService {
     this.host = host;
   }
 
-  login(username, password){
+  login(username, password, callback){
     let loginForm = {username, password},
         requestObj = {
           method : 'POST',
-          url : host + '/api/login',
+          url : 'http://localhost:3000/api/login',
           body : loginForm,
           json: true
         };
-    return request(requestObj, responseHandler);
+    return request(requestObj, callback);
   }
 
-  logout(){
+  logout(callback){
     let requestObj = {
       method : 'GET',
-      url : host + '/api/logout'
+      url : 'http://localhost:3000/api/logout'
     };
-    return request(requestObj, responseHandler);
+    return request(requestObj, callback);
   }
 
-  responseHandler(err, res, body){
-    if(err)
-      err;
-    else
-     res.ok ? body : null
-  }
+
 
 }
