@@ -1,11 +1,6 @@
 const path = require('path'),
       HtmlWebpackPlugin = require('html-webpack-plugin'),
-      ExtractTextPlugin = require('extract-text-webpack-plugin'),
-      HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-        template: 'index.html',
-        filename: 'index.html',
-        inject: 'body'
-      });
+      ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 let srcDir = path.resolve(__dirname, 'src'),
     distDir = path.resolve(__dirname, 'dist'),
@@ -26,7 +21,13 @@ let srcDir = path.resolve(__dirname, 'src'),
           },
           {
             test: /\.css$/,
-            loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+            loader: ExtractTextPlugin.extract({
+              use: 'css-loader'
+            })
+          },
+          {
+            test: /\.jpg|\.png|\.svg|\.otf|\.ttf|\.woff?|\.eot$/,
+            loader: 'url-loader?limit=100000'
           }
         ]
       },
@@ -35,8 +36,15 @@ let srcDir = path.resolve(__dirname, 'src'),
         filename: 'sauceapp.bundle.js'
       },
       plugins: [
-        new ExtractTextPlugin('./src/css/bootstrap.min.css'),
-        HtmlWebpackPluginConfig
+        new ExtractTextPlugin({
+          filename: 'style.css',
+          allChunks: true
+        }),
+        new HtmlWebpackPlugin({
+          template: 'index.html',
+          filename: 'index.html',
+          inject: 'body'
+        })
       ]
     };
 
