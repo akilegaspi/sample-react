@@ -1,5 +1,6 @@
 const path = require('path'),
       HtmlWebpackPlugin = require('html-webpack-plugin'),
+      ExtractTextPlugin = require('extract-text-webpack-plugin'),
       HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
         template: 'index.html',
         filename: 'index.html',
@@ -22,6 +23,10 @@ let srcDir = path.resolve(__dirname, 'src'),
             test: /\.jsx$/,
             exclude: /(node_modules)/,
             loader: 'babel-loader'
+          },
+          {
+            test: /\.css$/,
+            loader: ExtractTextPlugin.extract("style-loader", "css-loader")
           }
         ]
       },
@@ -29,7 +34,10 @@ let srcDir = path.resolve(__dirname, 'src'),
         path: path.resolve(__dirname, 'dist'),
         filename: 'sauceapp.bundle.js'
       },
-      plugins: [HtmlWebpackPluginConfig]
+      plugins: [
+        new ExtractTextPlugin('./src/css/bootstrap.min.css'),
+        HtmlWebpackPluginConfig
+      ]
     };
 
 
