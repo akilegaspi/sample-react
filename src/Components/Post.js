@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Comment from './Comment.js';
 
 export default class Post extends Component {
