@@ -1,21 +1,34 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
-import LoginForm from '../Components/LoginForm';
+import Login from '../Container/Login';
+import Signup from '../Container/Signup';
 
 export default class Home extends React.Component {
 
   constructor(props){
     super(props);
+    this.state = ({user: props.user});
+  }
+
+  componentDidMount(){
+
+  }
+
+  logIn(username, email, password){
+    this.props.authService.login(username, email, password, (err, res, body) => {
+      if(err)
+        throw err;
+      else{
+        this.setState({user: {}});
+      }
+    });
   }
 
   render(){
-    return (
-      <div className="login-container">
-        <div className="login-left"/>
-        <div className="login-right">
-          <LoginForm logIn={ this.props.authService.login }/>
-        </div>
-      </div>
-    );
+      if(this.state.user){
+        return <Signup />;
+      }
+      else {
+        return <Login />;
+      }
   }
 }

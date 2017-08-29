@@ -1,6 +1,11 @@
+import { CookiesProvider } from 'react-cookie';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Route, Link} from 'react-router-dom';
+
+import './resources/js/vendor/jquery-3.2.1.min.ext.js';
+import './resources/js/vendor/bootstrap.min.ext.js';
+
 import Home from './Container/Home';
 import Login from './Container/Login';
 import Signup from './Container/Signup';
@@ -15,9 +20,10 @@ import './resources/css/home.css';
 import './resources/css/login.css';
 import './resources/css/main.css';
 
+
 let main = document.getElementById('app');
 
-export default class App extends React.Component {
+class App extends React.Component {
 
   constructor(props){
     super(props);
@@ -32,7 +38,7 @@ export default class App extends React.Component {
       <BrowserRouter>
         <div>
           <Route path='/' render={ () => {
-            return <Home authService = { this.state.authService } />;
+            return <Home authService={ this.state.authService } />;
           }} />
           <Route path='/signup' render={() => {
             return <Signup userService={this.state.userService} />;
@@ -44,7 +50,15 @@ export default class App extends React.Component {
 
 }
 
+function Root(){
+  return (
+    <CookiesProvider>
+      <App />
+    </CookiesProvider>
+  );
+}
+
 ReactDOM.render(
-  <App />,
+  <Root />,
   main
 );
