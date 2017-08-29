@@ -105,11 +105,11 @@ $(document).ready(function(){
 (function() {
 
 var Menu = (function() {
-var burger = document.querySelector('.burger');
-var menu = document.querySelector('.menu');
-var menuList = document.querySelector('.menu__list');
-var brand = document.querySelector('.menu__brand');
-var menuItems = document.querySelectorAll('.menu__item');
+var burger = $('.burger');
+var menu = $('.menu');
+var menuList = $('.menu__list');
+var brand = $('.menu__brand');
+var menuItems = $('.menu__item');
 
 var active = false;
 
@@ -137,16 +137,13 @@ if (!active) {
 }
 };
 
-var bindActions = function() {
-burger.addEventListener('click', toggleMenu, false);
-};
+let bindActions = () => {
+  burger.on('click', toggleMenu);
+}
 
-var init = function() {
-bindActions();
-};
 
 return {
-init: init
+init: bindActions
 };
 
 }());
