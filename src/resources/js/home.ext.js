@@ -1,8 +1,7 @@
 function showStuff(element)  {
-    var tabContents = document.getElementsByClassName('tabContent');
-    for (var i = 0; i < tabContents.length; i++) {
-        tabContents[i].style.display = 'none';
-    }
+    document.getElementsByClassName('tabContent').forEach( content => {
+      content.style.display = 'none';
+    });
 
     // change tabsX into tabs-X in order to find the correct tab content
     var tabContentIdToShow = element.id.replace(/(\d)/g, '-$1');
@@ -13,9 +12,6 @@ function showStuff(element)  {
 
 
 $(document).ready(function(){
-
-
-
 
   $("#sauce-photo-upload-span").click(function(){
     $("#sauce-photo-upload").click();
@@ -38,7 +34,6 @@ $(document).ready(function(){
     $("#sauce-add-img-url-input").css('display', 'block');
     $("#sauce-add-img-url").hide();
   });
-
 
   $(".sauce-upload > li").click(function(){
     $(".sauceink-status .row .col-md-12:first-child").css("margin-top", "350px");
