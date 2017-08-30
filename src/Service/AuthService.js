@@ -4,13 +4,15 @@ export default class AuthService {
 
   constructor(host){
     this.host = host;
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   login(username, password, callback){
     let loginForm = {username, password},
         requestObj = {
           method : 'POST',
-          url : 'http://localhost:3000/api/login',
+          url : `${this.host}/api/login`,
           body : loginForm,
           json: true
         };
@@ -20,7 +22,7 @@ export default class AuthService {
   logout(callback){
     let requestObj = {
       method : 'GET',
-      url : 'http://localhost:3000/api/logout'
+      url : `${this.host}/api/logout`
     };
     return request(requestObj, callback);
   }
