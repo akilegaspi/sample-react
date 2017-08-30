@@ -36,7 +36,7 @@ let srcDir = path.resolve(__dirname, 'src'),
           },
           {
             test: /\.svg|\.otf|\.ttf|\.woff?|\.eot$/,
-            loader: 'url-loader?limit=100000&name='
+            loader: 'url-loader?limit=100000'
           }
         ]
       },
