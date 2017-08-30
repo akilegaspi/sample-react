@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Comment from './Comment.js';
+import Comment from './Comment';
 
 export default class Post extends Component {
   render(){
@@ -53,11 +53,9 @@ export default class Post extends Component {
           </div>
           <ul className="comments-list">
             { this.props.post.comments.map( comment =>{
-              <li className="comment">
                 <Comment
                   user={ comment.user }
                   commentDetail={ comment.content } />
-              </li>
             }) }
           </ul>
         </div>
