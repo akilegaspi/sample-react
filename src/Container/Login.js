@@ -5,6 +5,9 @@ import LoginForm from '../Components/LoginForm';
 
 import '../resources/js/login.ext.js';
 
+import '../resources/css/main.css';
+import '../resources/css/login.css';
+
 import saucelogo from '../resources/img/login-logo.png';
 
 export default class Login extends React.Component {
@@ -27,9 +30,9 @@ export default class Login extends React.Component {
             </a>
             <h1 id="or"><span>OR</span></h1>
           </header>
-          <LoginForm logIn={ this.logIn }/>
+          <LoginForm logIn={ this.props.logIn }/>
           <div className="text-center" id="register">
-            <p>If you don't have any account ...</p>
+            <p>If you don't have any account yet, you can register now. SIGN UP</p>
             <Link to={'/signup'}>
               <span className="fa fa-sign-in" aria-hidden="true" />
               SIGN UP
