@@ -27,15 +27,16 @@ let srcDir = path.resolve(__dirname, 'src'),
           {
             test: /\.css$/,
             loader: ExtractTextPlugin.extract({
+              fallback: 'style-loader',
               use: 'css-loader'
             })
           },
           {
             test: /\.(jpe?g|png)$/,
-            loader: 'file-loader?name=/img/[name].[ext]'
+            loader: 'file-loader?name=/[path]/[name].[ext]'
           },
           {
-            test: /\.svg|\.otf|\.ttf|\.woff?|\.eot$/,
+            test: /\.(svg|otf|ttf|woff|woff2|eot)$/,
             loader: 'url-loader?limit=100000'
           }
         ]
@@ -50,8 +51,7 @@ let srcDir = path.resolve(__dirname, 'src'),
           jQuery: "jquery"
         }),
         new ExtractTextPlugin({
-          filename: 'style.css',
-          allChunks: true
+          filename: '[name].css'
         }),
         new HtmlWebpackPlugin({
           template: 'index.html',
