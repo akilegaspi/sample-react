@@ -3,19 +3,28 @@ import { Link } from 'react-router-dom';
 import Comment from './Comment';
 
 export default class Post extends Component {
+
+  componentDidMount(){
+    this.props.post.user.then((res) => {
+      this.setState({
+        user: res.data.success
+      });
+    });
+  }
+
   render(){
     return (
       <div className="col-md-12">
         <div className="post-heading">
           <div className="pull-left image">
             <img
-              className="img-circle avator"
+              className="img-circle avatar"
               alt="user profile image"
               src={ this.props.post.image }/>
           </div>
           <div className="pull-left meta">
             <Link to={`/profile/${this.props.user.username}`}>
-              <b>{ this.props.user.fullName }</b>
+              <b>{ this.state.user.firstName }</b>
             </Link>
             made a post
           </div>
@@ -24,17 +33,17 @@ export default class Post extends Component {
           </h6>
         </div>
         <div className="post-description">
-          <p>{ this.props.post.content }</p>
+          <p>{ this.props.post.text }</p>
           <div className="stats">
             <Link
               className="btn btn-default stat-item"
-              to={`/like/${ this.props.post.id }`}>
+              to={`/like/${ this.props.post.postId }`}>
               <i className="fa fa-thumbs-up icon" />
               { this.props.post.likes }
             </Link>
             <Link
               className="btn btn-default stat-item"
-              to={`/share/${ this.props.post.id }`}>
+              to={`/share/${ this.props.post.postId }`}>
               <i className="fa fa-share icon" />
               { this.props.post.likes }
             </Link>

@@ -12,18 +12,32 @@ export default class Home extends React.Component {
 
   logIn(username, password){
     console.log(this.props);
-    this.props.authService.login(username, password, (err, res, body) => {
-      if(err)
-        throw err;
-      else{
-        this.setState({user: body});
+    this.props.authService.login(username, password)
+    .then((res) => {
+      console.log(res);
+      if(res.data.success) {
+        let data = res.data.success;
+        this.setState({
+          user: {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+            gender: data.gender,
+            username: data.username,
+            birthday: data.birthday
+          }
+        });
       }
     });
   }
 
   render(){
       if(this.state.user){
-        return <Timeline user={ this.state.user }/>;
+        return <Timeline
+          user={ this.state.user }
+          postService={ this.props.postService }
+          userService={ this.props.userService }
+        />;
       }
       else {
         return <Login logIn={ this.logIn }/>;

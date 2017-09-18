@@ -15,7 +15,26 @@ export default class Timeline extends React.Component {
   constructor(props){
     super(props);
     this.state = ({
-      user: props.user
+      user: props.user,
+      posts: []
+    });
+  }
+
+  componentDidMount(){
+    this.props.postService.getMyPosts()
+    .then( (res) => {
+      console.log(res);
+      this.setState({
+        user: this.state.user,
+        posts: res.data.success.map( post => {
+          return {
+            postId : post.objectId,
+            user: this.userService.queryUser(post.user.objectId),
+            content: post.text,
+            time: post.createdAt
+          }
+        })
+      });
     });
   }
 
@@ -99,6 +118,13 @@ export default class Timeline extends React.Component {
                   </ul>
                 </div>
                 <input className="sauce-post-update" type="submit" value="POST UPDATE" />
+              </div>
+            </div>
+            <div className="sauceink-status container bootstrap snippet">
+              <div className="row">
+                { this.posts.map( post =>{
+                  <Post post={post} />
+                }) }
               </div>
             </div>
           </div>
