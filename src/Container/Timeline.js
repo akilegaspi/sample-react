@@ -21,21 +21,25 @@ export default class Timeline extends React.Component {
   }
 
   componentDidMount(){
+    let _this = this;
     this.props.postService.getMyPosts()
     .then( (res) => {
-      console.log(res);
-      this.setState({
-        user: this.state.user,
+      _this.setState({
+        user: _this.state.user,
         posts: res.data.success.map( post => {
           return {
             postId : post.objectId,
-            user: this.userService.queryUser(post.user.objectId),
+            user: (()=>this.userService.queryUser(post.user.objectId)),
             content: post.text,
-            time: post.createdAt
+            time: post.createdAt,
+            comments: (()=>this.postService.getComments(post.objectId)),
+            likes: (()=>this.postService.getLikes(post.objectId)),
+            image: bokunopico
           }
         })
       });
     });
+
   }
 
   render(){
@@ -67,9 +71,8 @@ export default class Timeline extends React.Component {
                   <a className="dropdown-toggle" href="#" data-toggle="dropdown">HELLO <strong>{ this.state.user.firstName}!</strong> &nbsp;
                   <i className="fa fa-cog" aria-hidden="true"></i></a>
                   <ul className="dropdown-menu">
-                    <li><a href="account-settings.html">ACCOUNT SETTINGS</a></li>
                     <li><Link to={'/settings'}>Account Settings</Link></li>
-                    <li><Link to={'/discover'}>DISCOVER</Link></li>
+                    <li><Link to={'/logout'}>Logout</Link></li>
                   </ul>
                 </li>
               </ul>
@@ -88,43 +91,49 @@ export default class Timeline extends React.Component {
             <li>R</li>
           </ul>
         </span>
+        <div id="sauceink-header">
+          <h1 className="text-center">
+            DISCOVER AND SHOP FOR THE THINGS YOU LOVE.
+          </h1>
+        </div>
         <div className="content-container">
-          <div className="row">
-            <div className="container update-status">
+          <div className="container update-status">
+            <div className="row">
               <div className="col-md-2 text-center">
                 <img className="img-circle"
                   style={{height: 90+'px', width: 90+'px'}}
                   src={ bokunopico } />
               </div>
               <div className="col-md-10">
-                <textarea></textarea>
-                <div className="row hidden">
-                  <img id="sauce-upload-image" />
-                  <iframe id="sauce-upload-video">
-                  </iframe>
-                  <a id="sauceink-link-text" href="#"></a>
-                </div>
-                <div className="row">
-                  <ul className="sauce-upload side bar tabs">
-                    <li id="tabs1">
-                      <i className="fa fa-picture-o" aria-hidden="true"></i>
-                    </li>
-                    <li id="tabs3">
-                      <i className="fa fa-link" aria-hidden="true"></i>
-                    </li>
-                    <li id="tabs2">
-                      <i className="fa fa-video-camera" aria-hidden="true"></i>
-                    </li>
-                  </ul>
-                </div>
-                <input className="sauce-post-update" type="submit" value="POST UPDATE" />
+                <h5>WHAT'S NEW, {this.state.user.firstName}</h5>
+                <form>
+                  <textarea></textarea>
+                  <div className="row hidden">
+                    <img id="sauce-upload-image" />
+                    <iframe id="sauce-upload-video">
+                    </iframe>
+                    <a id="sauceink-link-text" href="#"></a>
+                  </div>
+                  <div className="row">
+                    <ul className="sauce-upload side bar tabs">
+                      <li id="tabs1">
+                        <i className="fa fa-picture-o" aria-hidden="true"></i>
+                      </li>
+                      <li id="tabs3">
+                        <i className="fa fa-link" aria-hidden="true"></i>
+                      </li>
+                      <li id="tabs2">
+                        <i className="fa fa-video-camera" aria-hidden="true"></i>
+                      </li>
+                    </ul>
+                  </div>
+                  <input className="sauce-post-update" type="submit" value="POST UPDATE" />
+                </form>
               </div>
             </div>
             <div className="sauceink-status container bootstrap snippet">
               <div className="row">
-                { this.posts.map( post =>{
-                  <Post post={post} />
-                }) }
+                { this.state.posts.map( post => <Post key={ post.postId } post={ post } /> ) }
               </div>
             </div>
           </div>

@@ -3,12 +3,28 @@ import { Link } from 'react-router-dom';
 import Comment from './Comment';
 
 export default class Post extends Component {
-
+  constructor(props){
+    super(props);
+    this.state = ({
+      user: null,
+      likes: [],
+      comments: []
+    });
+  }
   componentDidMount(){
-    this.props.post.user.then((res) => {
-      this.setState({
-        user: res.data.success
-      });
+    let _this = this;
+    _this.props.post.user().then((user) => {
+      _this.props.post.likes().then(
+        (likes) => {
+          _this.props.post.comments().then(
+            (comments) => {
+              _this.setState({
+                user: user.data.success,
+                likes: likes.data.success,
+                comments: comments.data.success
+              });
+            });
+        });
     });
   }
 
@@ -39,13 +55,13 @@ export default class Post extends Component {
               className="btn btn-default stat-item"
               to={`/like/${ this.props.post.postId }`}>
               <i className="fa fa-thumbs-up icon" />
-              { this.props.post.likes }
+              { this.state.likes }
             </Link>
             <Link
               className="btn btn-default stat-item"
               to={`/share/${ this.props.post.postId }`}>
               <i className="fa fa-share icon" />
-              { this.props.post.likes }
+              { this.state.likes }
             </Link>
           </div>
         </div>
@@ -61,7 +77,7 @@ export default class Post extends Component {
             </span>
           </div>
           <ul className="comments-list">
-            { this.props.post.comments.map( comment =>{
+            { this.state.comments.map( comment =>{
                 <Comment
                   user={ comment.user }
                   commentDetail={ comment.content } />

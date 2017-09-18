@@ -11,10 +11,8 @@ export default class Home extends React.Component {
   }
 
   logIn(username, password){
-    console.log(this.props);
     this.props.authService.login(username, password)
     .then((res) => {
-      console.log(res);
       if(res.data.success) {
         let data = res.data.success;
         this.setState({
