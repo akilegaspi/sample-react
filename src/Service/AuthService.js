@@ -1,9 +1,7 @@
-import request from 'browser-request';
-
 export default class AuthService {
 
-  constructor(host){
-    this.host = host;
+  constructor(request){
+    this.request = request;
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
   }
@@ -12,21 +10,20 @@ export default class AuthService {
     let loginForm = {username, password},
         requestObj = {
           method : 'POST',
-          url : `${this.host}/api/login`,
-          body : loginForm,
-          json: true
+          url : '/login',
+          data : loginForm,
+          responseType: 'json'
         };
-    return request(requestObj, callback);
+    return this.request(requestObj);
   }
 
   logout(callback){
     let requestObj = {
       method : 'GET',
-      url : `${this.host}/api/logout`
+      url : '/logout',
+      responseType: 'json'
     };
-    return request(requestObj, callback);
+    return this.request(requestObj, callback);
   }
-
-
 
 }
