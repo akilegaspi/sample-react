@@ -30,12 +30,12 @@ export default class LoginForm extends React.Component {
           <div className="icon-addon addon-lg">
             <input
               className="form-control"
-              id="username"
+              id="email"
               name="username"
               value={this.state.username}
               onChange={this.onChange}
             />
-            <label title="username" className="fa fa-user" htmlFor="username"/>
+            <label title="username" className="fa fa-user" htmlFor="email"/>
           </div>
         </div>
         <div className="form-group">
@@ -60,7 +60,7 @@ export default class LoginForm extends React.Component {
         <div>
           <a href="#">Lost Password?</a>
           <input type="submit" value="LOGIN" />
-          <div className="clear-fix"/>
+          <div className="clear-fix"></div>
         </div>
       </form>
     );

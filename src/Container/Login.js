@@ -30,7 +30,9 @@ export default class Login extends React.Component {
             </a>
             <h1 id="or"><span>OR</span></h1>
           </header>
+          <div>
           <LoginForm logIn={ this.props.logIn }/>
+          </div>
           <div className="text-center" id="register">
             <p>If you don't have any account yet, you can register now. SIGN UP</p>
             <Link to={'/signup'}>
