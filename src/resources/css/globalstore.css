@@ -1,0 +1,97 @@
+#globalstore-con{
+  width: 90%;
+  padding: 40px 50px;
+  background-color: #fff;
+  margin-top: -60px;
+  margin-bottom: 50px;
+}
+
+.globalstore-item{
+  padding: 15px;
+}
+
+.globalstore-item .globalstore-item-title > a{
+  color: #91003e;
+  font-weight: bold;
+}
+
+.globalstore-item .globalstore-price{
+  margin-bottom: 30px;
+}
+
+.globalstore-item .globalstore-buynow{
+  border: solid 2px black;
+  color: #91003e;
+  font-size: 18px;
+  padding: 10px;
+  text-decoration: none;
+  transition: all .5s ease;
+}
+
+.globalstore-item .globalstore-buynow:hover{
+  background-color: black;
+}
+
+.overlay-con{
+  position: relative;
+  height: 300px;
+}
+
+
+.overlay-image {
+  height: inherit;
+  width: 100%;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: rgba(140, 140, 140, .7);
+}
+
+.overlay-con:hover .overlay {
+  opacity: 1;
+}
+
+.overlay-text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+
+@media only screen and (max-width: 971px) {
+
+
+}
+
+@media only screen and (max-width: 768px) {
+
+  .overlay-con{
+    height: 100%;
+  }
+
+
+  .overlay-image {
+    height: auto;
+  }
+}
+
+
+
+@media only screen and (max-width: 641px) {
+  .globalstore-item .globalstore-buynow{
+    font-size: 10px;
+  }
+}
