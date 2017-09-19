@@ -6,9 +6,8 @@ export default class UserService {
     this.follow = this.follow.bind(this);
   }
 
-  signup(username, email, password){
-    let signupForm = {username, email, password},
-        requestObj = {
+  signup(signupForm){
+        let requestObj = {
           method : 'POST',
           url : '/signup',
           data : signupForm,
