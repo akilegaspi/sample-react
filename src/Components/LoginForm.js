@@ -29,6 +29,7 @@ export default class LoginForm extends React.Component {
           <p>USERNAME OR EMAIL ADDRESS</p>
           <div className="icon-addon addon-lg">
             <input
+              type="text"
               className="form-control"
               id="email"
               name="username"
@@ -42,6 +43,7 @@ export default class LoginForm extends React.Component {
           <p>PASSWORD</p>
           <div className="icon-addon addon-lg">
             <input
+              type="password"
               className="form-control"
               id="password"
               name="password"
