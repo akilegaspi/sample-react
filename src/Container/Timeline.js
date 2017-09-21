@@ -1,13 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import DiscoverBurger from '../Components/DiscoverBurger';
 import Navbar from '../Components/Navbar';
 import SauceinkHeader from '../Components/SauceinkHeader';
 import UpdateStatus from '../Components/UpdateStatus';
 import Post from '../Components/Post';
-
-import '../resources/js/home.ext.js';
 
 import '../resources/css/main.css';
 import '../resources/css/home.css';
@@ -29,17 +26,16 @@ export default class Timeline extends React.Component {
     let _this = this;
     this.props.postService.getMyPosts()
     .then( (res) => {
-      console.log(res);
       _this.setState({
         user: _this.state.user,
         posts: res.data.success.map( post => {
           return {
             postId : post.objectId,
-            user: (()=>this.userService.queryUser(post.user.objectId)),
+            user: (()=>this.props.userService.queryUser(post.user.objectId)),
             content: post.text,
             time: post.createdAt,
-            comments: (()=>this.postService.getComments(post.objectId)),
-            likes: (()=>this.postService.getLikes(post.objectId)),
+            comments: (()=>this.props.postService.getComments(post.objectId)),
+            likes: (()=>this.props.postService.getLikes(post.objectId)),
             image: bokunopico
           }
         })
@@ -51,7 +47,7 @@ export default class Timeline extends React.Component {
   render(){
     return (
       <main id="home-container">
-        <Navbar name={ this.state.user.firstName }/>
+        <Navbar name={ this.state.user.firstName } />
         <DiscoverBurger />
         <SauceinkHeader />
         <div className="content-container">
