@@ -1,6 +1,6 @@
-import { Component } from 'react';
+import React from 'react';
 
-export default class DiscoverBurger extends Component {
+export default class DiscoverBurger extends React.Component {
 
   render() {
     return (

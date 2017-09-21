@@ -1,12 +1,13 @@
-import { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Comment from './Comment';
 
-export default class Post extends Component {
+export default class Post extends React.Component {
   constructor(props){
     super(props);
+    console.log(props);
     this.state = ({
-      user: null,
+      user: {},
       likes: [],
       comments: []
     });
@@ -18,6 +19,9 @@ export default class Post extends Component {
         (likes) => {
           _this.props.post.comments().then(
             (comments) => {
+              console.log(user);
+              console.log(likes);
+              console.log(comments);
               _this.setState({
                 user: user.data.success,
                 likes: likes.data.success,
@@ -39,7 +43,7 @@ export default class Post extends Component {
               src={ this.props.post.image }/>
           </div>
           <div className="pull-left meta">
-            <Link to={`/profile/${this.props.user.username}`}>
+            <Link to={`/profile/${this.state.user.username}`}>
               <b>{ this.state.user.firstName }</b>
             </Link>
             made a post
@@ -49,7 +53,7 @@ export default class Post extends Component {
           </h6>
         </div>
         <div className="post-description">
-          <p>{ this.props.post.text }</p>
+          <p>{ this.props.post.content }</p>
           <div className="stats">
             <Link
               className="btn btn-default stat-item"
@@ -70,7 +74,7 @@ export default class Post extends Component {
             <input
               className="form-control" type="text"
               placeholder="Add a comment" />
-            <span class="input-group-addon">
+            <span className="input-group-addon">
               <Link to={'#'}>
                 <i className="fa fa-edit"></i>
               </Link>

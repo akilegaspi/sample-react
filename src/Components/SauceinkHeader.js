@@ -1,6 +1,6 @@
-import { Component } from 'react';
+import React from 'react';
 
-export default class SauceinkHeader extends Component {
+export default class SauceinkHeader extends React.Component {
 
   render() {
     return (

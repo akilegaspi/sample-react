@@ -1,6 +1,8 @@
-import { Component } from 'react';
+import React from 'react';
 
-export default class UpdateStatus extends Component {
+import bokunopico from '../resources/img/no-profile-pic.jpg';
+
+export default class UpdateStatus extends React.Component {
   render() {
     return (
       <div className="container update-status">
