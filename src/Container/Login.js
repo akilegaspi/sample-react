@@ -5,7 +5,6 @@ import LoginForm from '../Components/LoginForm';
 
 import '../resources/js/login.ext.js';
 
-import '../resources/css/main.css';
 import '../resources/css/login.css';
 
 import saucelogo from '../resources/img/login-logo.png';
