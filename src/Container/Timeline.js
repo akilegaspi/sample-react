@@ -24,7 +24,7 @@ export default class Timeline extends React.Component {
 
   componentDidMount(){
     let _this = this;
-    this.props.postService.getMyPosts()
+    this.props.postService.getPosts(this.state.user.username)
     .then( (res) => {
       _this.setState({
         user: _this.state.user,

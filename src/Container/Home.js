@@ -16,15 +16,10 @@ export default class Home extends React.Component {
       if(res.data.success) {
         let data = res.data.success;
         this.setState({
-          user: {
-            firstName: data.firstName,
-            lastName: data.lastName,
-            email: data.email,
-            gender: data.gender,
-            username: data.username,
-            birthday: data.birthday
-          }
+          user: data
         });
+      } else {
+        console.log(res.data.error);
       }
     });
   }

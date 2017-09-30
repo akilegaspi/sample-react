@@ -4,7 +4,6 @@ export default class PostService {
     this.request = request;
     this.doPost = this.doPost.bind(this);
     this.getPosts = this.getPosts.bind(this);
-    this.getMyPosts = this.getMyPosts.bind(this);
     this.likePost = this.likePost.bind(this);
     this.commentPost = this.commentPost.bind(this);
     this.sharePost = this.sharePost.bind(this);
@@ -14,10 +13,6 @@ export default class PostService {
 
   getPosts(id){
     return this.request.get(`/post/${id}`);
-  }
-
-  getMyPosts() {
-    return this.getPosts("");
   }
 
   doPost(content, file) {
@@ -42,8 +37,8 @@ export default class PostService {
     return this.request(requestObj);
   }
 
-  commentPost(postId, comment) {
-    let commentForm = {postId, comment},
+  commentPost(user, postId, comment) {
+    let commentForm = {user, postId, comment},
         requestObj = {
           method: 'POST',
           data: commentForm,
