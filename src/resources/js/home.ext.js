@@ -1,7 +1,8 @@
 function showStuff(element)  {
-    document.getElementsByClassName('tabContent').forEach( content => {
-      content.style.display = 'none';
-    });
+    var tabContents = document.getElementsByClassName('tabContent');
+    for (var i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = 'none';
+    }
 
     // change tabsX into tabs-X in order to find the correct tab content
     var tabContentIdToShow = element.id.replace(/(\d)/g, '-$1');
@@ -35,9 +36,6 @@ $(document).ready(function(){
     $("#sauce-add-img-url").hide();
   });
 
-  $(".sauce-upload > li").click(function(){
-    $(".sauceink-status .row .col-md-12:first-child").css("margin-top", "350px");
-  });
 
   $(".tab-cancel").click(function(){
     $("#sauce-add-img-url").show();
@@ -49,7 +47,6 @@ $(document).ready(function(){
     $("#sauce-add-img-url-input").hide();
     $("#sauce-add-img-url").show();
     $("#sauce-add-photos").hide();
-    $(".sauceink-status .row .col-md-12:first-child").css("margin-top", "280px");
     $("div.sauce-photos-preview > img").remove();
   });
 
@@ -90,59 +87,59 @@ $(document).ready(function(){
     });
   });
 
+
+
+
+  /*Sauceink Explore*/
+  $(".sauceink-explore").click(function(){
+    // $(".sauceink-explore-content").slideToggle();
+    $(".sauceink-explore-content").toggle('slide');
+  });
+
+
+    // var figure = $(".explore-video").hover( hoverVideo, hideVideo );
+    //
+    // function hoverVideo(e) {
+    //     $('video', this).get(0).play();
+    // }
+    //
+    // function hideVideo(e) {
+    //     $('video', this).get(0).pause();
+    // }
+
+    //Append Images and Videos for explore
+    var imgsVids =
+    [
+      '<div class="sauceink-explore-img"><div><img src="img/explore-images/explore1.jpg"></div></div>',
+      '<div class="sauceink-explore-img"><div><img src="img/explore-images/explore2.jpg"></div></div>',
+      '<div class="sauceink-explore-img"><div><img src="img/explore-images/explore3.jpg"></div></div>',
+      '<div class="sauceink-explore-img"><div><img src="img/explore-images/explore4.jpg"></div></div>',
+      '<div class="sauceink-explore-img"><div><img src="img/explore-images/explore5.jpg"></div></div>',
+      '<div class="sauceink-explore-vid"><div><video autoplay loop><source src="vid/placeholder-video.mp4" type="video/mp4">Your browser does not support the video tag.</video></div></div>',
+      '<div class="sauceink-explore-img"><div><img src="img/explore-images/explore6.jpg"></div></div>',
+      '<div class="sauceink-explore-img"><div><img src="img/explore-images/explore7.jpg"></div></div>',
+      '<div class="sauceink-explore-img"><div><img src="img/explore-images/explore8.jpg"></div></div>',
+      '<div class="sauceink-explore-img"><div><img src="img/explore-images/explore9.jpg"></div></div>',
+      '<div class="sauceink-explore-vid"><div><video autoplay loop><source src="vid/placeholder-video.mp4" type="video/mp4">Your browser does not support the video tag.</video></div></div>',
+      '<div class="sauceink-explore-img"><div><img src="img/explore-images/explore10.jpg"></div></div>',
+      '<div class="sauceink-explore-img"><div><img src="img/explore-images/explore11.jpg"></div></div>',
+      '<div class="sauceink-explore-img"><div><img src="img/explore-images/explore12.jpg"></div></div>',
+      '<div class="sauceink-explore-img"><div><img src="img/explore-images/explore13.jpg"></div></div>',
+      '<div class="sauceink-explore-img"><div><img src="img/explore-images/explore14.jpg"></div></div>',
+      '<div class="sauceink-explore-vid"><div><video autoplay loop><source src="vid/placeholder-video.mp4" type="video/mp4">Your browser does not support the video tag.</video></div></div>',
+      '<div class="sauceink-explore-img"><div><img src="img/explore-images/explore15.jpg"></div></div>',
+      '<div class="sauceink-explore-img"><div><img src="img/explore-images/explore16.jpg"></div></div>',
+      '<div class="sauceink-explore-img"><div><img src="img/explore-images/explore17.jpg"></div></div>',
+      '<div class="sauceink-explore-img"><div><img src="img/explore-images/explore18.jpg"></div></div>',
+      '<div class="sauceink-explore-img"><div><img src="img/explore-images/explore19.jpg"></div></div>',
+      '<div class="sauceink-explore-img"><div><img src="img/explore-images/explore20.jpg"></div></div>',
+      '<div class="sauceink-explore-vid"><div><video autoplay loop><source src="vid/placeholder-video.mp4" type="video/mp4">Your browser does not support the video tag.</video></div></div>',
+    ];
+
+    imgsVidsRev = imgsVids.reverse();
+
+    $.each( imgsVidsRev, function( index, value ) {
+      $(".sauceink-explore-content-flex").append(value);
+    });
+  /*End Of Sauceink Explore*/
 });
-
-
-
-
-
-//Menu Js
-(function() {
-
-var Menu = (function() {
-var burger = $('.burger');
-var menu = $('.menu');
-var menuList = $('.menu__list');
-var brand = $('.menu__brand');
-var menuItems = $('.menu__item');
-
-var active = false;
-
-var toggleMenu = function() {
-if (!active) {
-  menu.classList.add('menu--active');
-  menuList.classList.add('menu__list--active');
-  brand.classList.add('menu__brand--active');
-  burger.classList.add('burger--close');
-  for (var i = 0, ii = menuItems.length; i < ii; i++) {
-    menuItems[i].classList.add('menu__item--active');
-  }
-
-  active = true;
-} else {
-  menu.classList.remove('menu--active');
-  menuList.classList.remove('menu__list--active');
-  brand.classList.remove('menu__brand--active');
-  burger.classList.remove('burger--close');
-  for (var i = 0, ii = menuItems.length; i < ii; i++) {
-    menuItems[i].classList.remove('menu__item--active');
-  }
-
-  active = false;
-}
-};
-
-let bindActions = () => {
-  burger.on('click', toggleMenu);
-}
-
-
-return {
-init: bindActions
-};
-
-}());
-
-Menu.init();
-
-}());
