@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 export default class LoginForm extends React.Component {
 
   constructor(props){
@@ -60,7 +62,7 @@ export default class LoginForm extends React.Component {
           </label>
         </div>
         <div>
-          <a href="#">Lost Password?</a>
+          <Link to={'/lost-password'}>Lost Password?</Link>
           <input type="submit" value="LOGIN" />
           <div className="clear-fix"></div>
         </div>

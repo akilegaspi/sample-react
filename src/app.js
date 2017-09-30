@@ -8,7 +8,10 @@ import './resources/js/vendor/jquery-3.2.1.min.ext.js';
 import './resources/js/vendor/bootstrap.min.ext.js';
 
 import Home from './Container/Home';
+import LostPassword from './Container/LostPassword';
+import Profile from './Container/Profile';
 import Signup from './Container/Signup';
+
 import AuthService from './Service/AuthService';
 import UserService from './Service/UserService';
 import PostService from './Service/PostService';
@@ -25,8 +28,7 @@ class App extends React.Component {
   constructor(props){
     super(props);
     let request = axios.create({
-      baseURL: "http://localhost:3000/api",
-      withCredentials: true
+      baseURL: "http://localhost:3000/api"
     });
     this.state = ({
       authService: new AuthService(request),
@@ -46,8 +48,20 @@ class App extends React.Component {
               userService={ this.state.userService }
             />;
           }} />
-          <Route path='/signup' render={() => {
+
+          <Route exact path='/signup' render={() => {
             return <Signup userService={ this.state.userService } />;
+          }} />
+
+          <Route path='/lost-password' render={() =>{
+            return <LostPassword userService={ this.state.userService } />;
+          }} />
+
+          <Route path='/profile/:username' render={ () => {
+            return <Profile
+              userService={ this.state.userService }
+              postService={ this.state.postService }
+            />;
           }} />
         </div>
       </BrowserRouter>
