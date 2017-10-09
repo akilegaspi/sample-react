@@ -6,7 +6,7 @@ export default class SauceinkHeader extends React.Component {
     return (
       <div id="sauceink-header">
         <h1 className="text-center">
-          DISCOVER AND SHOP FOR THE THINGS YOU LOVE.
+          { this.props.header }
         </h1>
       </div>
     );
