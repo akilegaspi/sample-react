@@ -1,10 +1,9 @@
 import React from 'react';
 
-import DiscoverBurger from '../Components/DiscoverBurger';
-import Navbar from '../Components/Navbar';
-import SauceinkHeader from '../Components/SauceinkHeader';
+import UserContainer from './UserContainer';
 import UpdateStatus from '../Components/UpdateStatus';
 import Post from '../Components/Post';
+import SauceinkHeader from '../Components/SauceinkHeader';
 
 import '../resources/css/main.css';
 import '../resources/css/home.css';
@@ -17,17 +16,16 @@ export default class Timeline extends React.Component {
   constructor(props){
     super(props);
     this.state = ({
-      user: props.user,
       posts: []
     });
   }
 
   componentDidMount(){
     let _this = this;
-    this.props.postService.getPosts(this.state.user.username)
+    this.props.postService.getPosts(this.props.user.username)
     .then( (res) => {
       _this.setState({
-        user: _this.state.user,
+        user: _this.props.user,
         posts: res.data.success.map( post => {
           return {
             postId : post.objectId,
@@ -46,19 +44,17 @@ export default class Timeline extends React.Component {
 
   render(){
     return (
-      <main id="home-container">
-        <Navbar name={ this.state.user.firstName } />
-        <DiscoverBurger />
-        <SauceinkHeader />
+      <UserContainer user={ this.props.user } >
+        <SauceinkHeader header='DISCOVER AND SHOP FOR THE THINGS YOU LOVE.'/>
         <div className="content-container">
-          <UpdateStatus name={ this.state.user.firstName } />
-          <div className="sauceink-status container bootstrap snippet">
-            <div className="row">
-              { this.state.posts.map( post => <Post key={ post.postId } post={ post } /> ) }
-            </div>
+        <UpdateStatus name={ this.props.user.firstName } />
+        <div className="sauceink-status container bootstrap snippet">
+          <div className="row">
+            { this.state.posts.map( post => <Post key={ post.postId } post={ post } /> ) }
           </div>
         </div>
-      </main>
+      </div>
+    </UserContainer>
     );
   }
 

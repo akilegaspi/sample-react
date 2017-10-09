@@ -24,7 +24,7 @@ export default class Navbar extends React.Component {
             </div>
             <div className="collapse navbar-collapse" id="myNavbar">
               <ul className="nav navbar-nav">
-                <li className="active">
+                <li>
                   <Link to={'/'}>Home</Link>
                 </li>
               </ul>
@@ -33,15 +33,32 @@ export default class Navbar extends React.Component {
                   <a className="dropdown-toggle" href="#" data-toggle="dropdown">HELLO <strong>{ this.props.name}!</strong> &nbsp;
                   <i className="fa fa-cog" aria-hidden="true"></i></a>
                   <ul className="dropdown-menu">
-                    <li><Link to={'/settings'}>Account Settings</Link></li>
-                    <li><Link to={'/logout'}>Logout</Link></li>
+                    <li>
+                      <Link to={'/account-settings'}>
+                        Account Settings
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to={'/discover'}>
+                        Discover
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to={'/global-store'}>
+                        Global Store
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to={'/logout'}>
+                        Logout
+                      </Link>
+                    </li>
                   </ul>
                 </li>
               </ul>
             </div>
           </div>
         </nav>
-
     );
   }
 }
